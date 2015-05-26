@@ -1,0 +1,11 @@
+{
+  "name": "gulp-angular-skeleton",
+  "version": "0.0.1",
+  "description": "A starting point for an Angular project with build tooling",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mfeckie/gulp-angular-skeleton.git"
+  },
+  "author": "mfeckie@thoughtworks.com",
+  "license": "MIT"
+}
