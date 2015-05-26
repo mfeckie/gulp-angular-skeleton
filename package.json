@@ -7,5 +7,8 @@
     "url": "https://github.com/mfeckie/gulp-angular-skeleton.git"
   },
   "author": "mfeckie@thoughtworks.com",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.8.11"
+  }
 }
