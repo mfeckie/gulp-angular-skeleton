@@ -1,6 +1,11 @@
 var gulp = require('gulp');
 var connect = require('gulp-connect');
 var sass = require('gulp-sass');
+var es6 = require('gulp-babel');
+
+function errorHandler (error) {
+  console.log(error.toString());
+}
 
 gulp.task('connect', ['index', 'scripts', 'styles'], function () {
   connect.server({
@@ -15,8 +20,15 @@ gulp.task('index', function () {
   .pipe(connect.reload());
 });
 
+gulp.task('inject', function () {
+  gulp.src('./app/index.html')
+    .pipe(inject(gulp.src('./app/js/**/*', {read: false}), {relative: true}))
+    .pipe(gulp.dest('./tmp'))
+});
+
 gulp.task('scripts', function () {
   return gulp.src('app/js/**/*.js')
+  .pipe(es6().on('error', errorHandler))
   .pipe(gulp.dest('tmp/js'))
   .pipe(connect.reload());
 });
