@@ -2,20 +2,21 @@ var gulp = require('gulp');
 var connect = require('gulp-connect');
 var sass = require('gulp-sass');
 var es6 = require('gulp-babel');
+var inject = require('gulp-inject');
 
 function errorHandler (error) {
   console.log(error.toString());
 }
 
-gulp.task('connect', ['index', 'scripts', 'styles'], function () {
+gulp.task('connect', ['html', 'scripts', 'styles'], function () {
   connect.server({
     root: 'tmp',
     livereload: true
   });
 });
 
-gulp.task('index', function () {
-  return gulp.src('app/index.html')
+gulp.task('html', ['inject'], function () {
+  return gulp.src(['app/**/*.html', '!app/index.html'])
   .pipe(gulp.dest('tmp'))
   .pipe(connect.reload());
 });
@@ -41,8 +42,8 @@ gulp.task('styles', function () {
 });
 
 gulp.task('watch', function () {
-  gulp.watch('app/index.html', ['index']);
-  gulp.watch('app/js/**/*.js', ['scripts']);
+  gulp.watch('app/**/*.html', ['html']);
+  gulp.watch('app/js/**/*.js', ['scripts', 'html']);
   gulp.watch('app/styles/**/*.scss', ['styles']);
 })
 
